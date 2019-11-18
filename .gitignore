@@ -1,98 +1,99 @@
-# https://www.gitignore.io/api/java,eclipse에 의해 생성됨
-# https://www.gitignore.io/?templates=java,eclipse에서 편집
 
-### 이클립스 ###
+# Created by https://www.gitignore.io/api/java,eclipse
+# Edit at https://www.gitignore.io/?templates=java,eclipse
+
+### Eclipse ###
 .metadata
-큰 상자/
-tmp /
-* .tmp
-* .bak
-* .swp
-* ~ .nib
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
 local.properties
-설정 /
+.settings/
 .loadpath
-추천자
+.recommenders
 
-# 외부 툴 빌더
-.externalToolBuilders /
+# External tool builders
+.externalToolBuilders/
 
-# 로컬로 저장된 "Eclipse launch configuration"
-*.쏘다
+# Locally stored "Eclipse launch configurations"
+*.launch
 
-# PyDev 특정 (Python IDE for Eclipse)
-* .pydevproject
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
 
-# CDT 특정 (C / C ++ 개발 툴링)
+# CDT-specific (C/C++ Development Tooling)
 .cproject
 
 # CDT- autotools
 .autotools
 
-# Java 주석 프로세서 (APT)
+# Java annotation processor (APT)
 .factorypath
 
-# PDT 관련 (PHP 개발 도구)
+# PDT-specific (PHP Development Tools)
 .buildpath
 
-# sbteclipse 플러그인
-.목표
+# sbteclipse plugin
+.target
 
-# Tern 플러그인
+# Tern plugin
 .tern-project
 
-# TeXlipse 플러그인
+# TeXlipse plugin
 .texlipse
 
-# STS (스프링 툴 스위트)
+# STS (Spring Tool Suite)
 .springBeans
 
-# 코드 추천자
-.recommenders /
+# Code Recommenders
+.recommenders/
 
-# 주석 처리
-.apt_generated /
+# Annotation Processing
+.apt_generated/
 
-# 스칼라 IDE 전용 (Eclipse 용 Scala & Java 개발)
+# Scala IDE specific (Scala & Java development for Eclipse)
 .cache-main
 .scala_dependencies
-. 워크 시트
+.worksheet
 
-### 이클립스 패치 ###
-# 이클립스 코어
-.계획
+### Eclipse Patch ###
+# Eclipse Core
+.project
 
-# JDT 특정 (Eclipse Java 개발 도구)
+# JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-# 주석 처리
+# Annotation Processing
 .apt_generated
 
-.sts4-cache /
+.sts4-cache/
 
 ### Java ###
-# 컴파일 된 클래스 파일
-*.수업
+# Compiled class file
+*.class
 
-# 로그 파일
-*.로그
+# Log file
+*.log
 
-# BlueJ 파일
-* .ctxt
+# BlueJ files
+*.ctxt
 
-# Java 용 모바일 도구 (J2ME)
-.mtj.tmp /
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# 패키지 파일 #
-*.항아리
-*.전쟁
-* .nar
-*.귀
-*.지퍼
-* .tar.gz
-* .rar
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-# 가상 머신 충돌 로그, http://www.java.com/en/download/help/error_hotspot.xml 참조
-hs_err_pid *
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
-# https://www.gitignore.io/api/java,eclipse의 끝
+# End of https://www.gitignore.io/api/java,eclipse
