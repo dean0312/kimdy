@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="simpleUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<!-- .html -->
+				<prop key="/hr/employeeForm.html">urlFilenameViewController</prop>
+
+				<!-- .do -->
+				<prop key="/hr/hr.do">hrController</prop>
+			</props>
+		</property>
+		<property name="alwaysUseFullPath" value="true" />
+	</bean>
+
+	<bean id="hrController"
+		class="net.plang.DYAccount.hr.controller.HRController">
+		<property name="hrServiceFacade" ref="hrServiceFacade" />
+		<property name="methodNameResolver" ref="parameterMethodNameResolver" />
+	</bean>
+</beans>

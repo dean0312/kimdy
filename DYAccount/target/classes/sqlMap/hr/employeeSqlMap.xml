@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="employee">
+    <typeAlias alias="employeeBean" type="net.plang.DYAccount.hr.to.EmployeeBean"/>
+
+    <resultMap id="employeeResult" class="employeeBean">
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="userPw" column="USER_PW"/>
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="positionName" column="POSITION_NAME"/>
+        <result property="deptCode" column="DEPT_CODE"/>
+        <result property="eMail" column="EMAIL"/>
+        <result property="gender" column="GENDER"/>
+        <result property="socialSecurityNumber" column="SOCIAL_SECURITY_NUMBER"/>
+        <result property="phoneNumber" column="PHONE_NUMBER"/>
+        <result property="companyCode" column="COMPANY_CODE"/>
+        <result property="birthDate" column="BIRTH_DATE"/>
+        <result property="zipCode" column="ZIP_CODE"/>
+        <result property="basicAddress" column="BASIC_ADDRESS"/>
+        <result property="detailAddress" column="DETAIL_ADDRESS"/>
+        <result property="image" column="IMAGE"/>
+    </resultMap>
+
+    <select id="selectEmployee" parameterClass="String" resultClass="employeeBean">
+    <![CDATA[
+        SELECT EMP_CODE as empCode,
+               USER_PW as userPw,
+               EMP_NAME as empName,
+               COMPANY_CODE as companyCode,
+               WORKPLACE_CODE as workPlaceCode,
+               DEPT_CODE as deptCode,
+               POSITION_CODE as positionCode,
+               SOCIAL_SECURITY_NUMBER as socialSecurityNumber,
+               BIRTH_DATE as birthDate,
+               GENDER,
+               EMAIL as eMail,
+               PHONE_NUMBER as phoneNumber,
+               IMAGE,
+               ZIP_CODE as zipCode,
+               BASIC_ADDRESS as basicAddress,
+               DETAIL_ADDRESS as detailAddress,
+               USER_OR_NOT as userOrNot,
+               DEPT_NAME as deptName,
+               POSITION_NAME as positionName
+        FROM EMPLOYEE
+        WHERE EMP_CODE = #empCode#
+    ]]>
+    </select>
+
+
+    <select id="selectEmployeeList" parameterClass="String" resultMap="employeeResult">
+    <![CDATA[
+        SELECT EMP_CODE,
+               EMP_NAME,
+               COMPANY_CODE,
+               WORKPLACE_CODE,
+               DEPT_CODE,
+               POSITION_CODE,
+               SOCIAL_SECURITY_NUMBER,
+               BIRTH_DATE,
+               GENDER,
+               EMAIL as eMail,
+               PHONE_NUMBER,
+               IMAGE,
+               USER_PW as userPw,
+               ZIP_CODE,
+               BASIC_ADDRESS,
+               DETAIL_ADDRESS,
+               USER_OR_NOT,
+               DEPT_NAME,
+               POSITION_NAME
+        FROM EMPLOYEE
+        where DEPT_CODE = #deptCode#
+    ]]>
+    </select>
+
+    <update id="updateEmployeeInfo" parameterClass="employeeBean">
+    <![CDATA[
+        UPDATE EMPLOYEE
+        SET USER_PW                = #userPw#,
+            EMP_NAME               = #empName#,
+            POSITION_CODE          = #positionCode#,
+            DEPT_CODE              = #deptCode#,
+            DEPT_NAME              = #deptName#,
+            PHONE_NUMBER           = #phoneNumber#,
+            ZIP_CODE               = #zipCode#,
+            BASIC_ADDRESS          = #basicAddress#,
+            DETAIL_ADDRESS         = #detailAddress#,
+            EMAIL                  = #eMail#,
+            IMAGE                  = #image#,
+            SOCIAL_SECURITY_NUMBER = #socialSecurityNumber#
+        WHERE EMP_CODE = #empCode#
+    ]]>
+    </update>
+
+    <update id="updateEmployee" parameterClass="employeeBean">
+    <![CDATA[
+        UPDATE EMPLOYEE
+        SET DEPT_CODE     = #deptCode#,
+            POSITION_CODE = #positionCode#
+        WHERE EMP_CODE = #empCode#
+    ]]>
+    </update>
+
+    <delete id="deleteEmployee" parameterClass="string">
+    <![CDATA[
+        DELETE
+        FROM EMPLOYEE
+        WHERE EMP_CODE = #empCode#
+    ]]>
+    </delete>
+
+    <insert id="insertEmployee" parameterClass="employeeBean">
+    <![CDATA[
+        INSERT INTO EMPLOYEE(EMP_CODE,
+                             USER_PW,
+                             EMP_NAME,
+                             POSITION_CODE,
+                             DEPT_CODE,
+                             GENDER,
+                             SOCIAL_SECURITY_NUMBER,
+                             PHONE_NUMBER,
+                             EMAIL as eMail,
+                             BIRTH_DATE,
+                             ZIP_CODE,
+                             BASIC_ADDRESS,
+                             DETAIL_ADDRESS,
+                             IMAGE)
+        VALUES (#empCode#,
+                #userPw#,
+                #empName#,
+                #positionCode#,
+                #deptCode#,
+                #gender#,
+                #socialSecurityNumber#,
+                #phoneNumber#,
+                #eMail#,
+                #birthDate#,
+                #zipCode#,
+                #basicAddress#,
+                #detailAddress#,
+                #image#)
+        ]]>
+    </insert>
+
+</sqlMap>

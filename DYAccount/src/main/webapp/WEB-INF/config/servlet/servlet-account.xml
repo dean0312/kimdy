@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <!-- .html -->
+                <prop key="/account/accountForm.html">urlFilenameViewController</prop>
+                <prop key="/account/slipForm.html">urlFilenameViewController</prop>
+                <prop key="/account/approvalManager.html">urlFilenameViewController</prop>
+                <prop key="/account/journalForm.html">urlFilenameViewController</prop>
+
+                <!-- .do -->
+                <prop key="/account/account.do">accountController</prop>
+                <prop key="/account/slip.do">slipController</prop>
+                <prop key="/account/journal.do">journalController</prop>
+                <prop key="/account/journalDetail.do">journalDetailController</prop>
+            </props>
+        </property>
+        <property name="alwaysUseFullPath" value="true"/>
+    </bean>
+
+    <bean id="slipController" class="net.plang.DYAccount.account.slip.controller.SlipController">
+        <property name="slipServiceFacade" ref="slipServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+    <bean id="journalController" class="net.plang.DYAccount.account.slip.controller.JournalController" >
+        <property name="journalServiceFacade" ref="journalServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+    <bean id="journalDetailController" class="net.plang.DYAccount.account.slip.controller.JournalDetailController">
+        <property name="journalDetailServiceFacade" ref="journalDetailServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+    <bean id="accountController" class="net.plang.DYAccount.account.base.controller.AccountController">
+        <property name="accountServiceFacade" ref="accountServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+</beans>

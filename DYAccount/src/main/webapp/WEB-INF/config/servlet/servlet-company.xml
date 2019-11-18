@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <!-- .html -->
+                <prop key="/company/WorkplaceInserForm.html">urlFilenameViewController</prop>
+                <prop key="/company/WorkplaceManagement.html">urlFilenameViewController</prop>
+
+                <!-- .do -->
+                <prop key="/company/workplace.do">workPlaceController</prop>
+                <prop key="/company/business.do">businessController</prop>
+                <prop key="/company/AccountRegisteredList.do">workPlaceController</prop>
+                <prop key="/company/updateApprovalStatus.do">workPlaceController</prop>
+
+            </props>
+        </property>
+        <property name="alwaysUseFullPath" value="true"/>
+    </bean>
+
+    <bean id="workPlaceController" class="net.plang.DYAccount.company.controller.WorkPlaceController">
+        <property name="workplaceServiceFacade" ref="workplaceServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+    
+    <bean id="businessController" class="net.plang.DYAccount.company.controller.BusinessController">
+        <property name="businessServiceFacade" ref="businessServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+
+</beans>

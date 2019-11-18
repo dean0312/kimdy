@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <!--DAO-->
+    <bean id="accountDAO" class="net.plang.DYAccount.account.base.dao.AccountDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    <bean id="journalDAO" class="net.plang.DYAccount.account.slip.dao.JournalDAOImpl" parent="iBatisDAOSupport" >
+    </bean>
+    <bean id="slipDAO" class="net.plang.DYAccount.account.slip.dao.SlipDAOImpl" parent="iBatisDAOSupport" >
+    </bean>
+    <bean id="journalDetailDAO" class="net.plang.DYAccount.account.slip.dao.JournalDetailDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+
+    <!--ApplicationService-->
+    <bean id="accountApplicationService"
+          class="net.plang.DYAccount.account.base.applicationService.AccountApplicationServiceImpl">
+        <property name="accountDAO" ref="accountDAO"/>
+    </bean>
+    <bean id="journalApplicationService"
+          class="net.plang.DYAccount.account.slip.applicationService.JournalApplicationServiceImpl">
+        <property name="journalDAO" ref="journalDAO"/>
+        <property name="journalDetailDAO" ref="journalDetailDAO"/>
+
+    </bean>
+    <bean id="journalDetailApplicationService"
+          class="net.plang.DYAccount.account.slip.applicationService.JournalDetailApplicationServiceImpl">
+        <property name="journalDetailDAO" ref="journalDetailDAO"/>
+    </bean>
+    <bean id="slipApplicationService"
+          class="net.plang.DYAccount.account.slip.applicationService.SlipApplicationServiceImpl">
+        <property name="slipDAO" ref="slipDAO"/>
+        <property name="journalDAO" ref="journalDAO"/>
+        <property name="journalDetailDAO" ref="journalDetailDAO"/>
+    </bean>
+
+    <!--ServiceFacade-->
+    <bean id="accountServiceFacade" class="net.plang.DYAccount.account.base.serviceFacade.AccountServiceFacadeImpl">
+        <property name="accountApplicationService" ref="accountApplicationService"/>
+    </bean>
+    <bean id="journalServiceFacade" class="net.plang.DYAccount.account.slip.serviceFacade.JournalServiceFacadeImpl">
+        <property name="journalApplicationService" ref="journalApplicationService"/>
+    </bean>
+    <bean id="journalDetailServiceFacade"
+          class="net.plang.DYAccount.account.slip.serviceFacade.JournalDetailServiceFacadeImpl">
+        <property name="journalDetailApplicationService" ref="journalDetailApplicationService"/>
+    </bean>
+    <bean id="slipServiceFacade" class="net.plang.DYAccount.account.slip.serviceFacade.SlipServiceFacadeImpl">
+
+        <property name="slipApplicationService" ref="slipApplicationService"/>
+    </bean>
+</beans>

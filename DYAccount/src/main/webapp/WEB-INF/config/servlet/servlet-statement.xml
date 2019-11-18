@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+
+        <property name="mappings">
+            <props>
+                <!-- .html -->
+                <prop key="/statement/totalTrialBalance.html">urlFilenameViewController</prop>
+                <prop key="/statement/incomeStatement.html">urlFilenameViewController</prop>
+                <prop key="/statement/financialPosition.html">urlFilenameViewController</prop>
+
+                <!-- .do -->
+                <prop key="/statement/totalTrialBalance.do">totalTrialBalanceController</prop>
+                <prop key="/statement/financialPosition.do">financialPositionController</prop>
+                <prop key="/statement/incomeStatement.do">incomeStatementController</prop>
+            </props>
+        </property>
+        <property name="alwaysUseFullPath" value="true"/>
+    </bean>
+
+    <bean id="totalTrialBalanceController" class="net.plang.DYAccount.account.statement.controller.TotalTrialBalanceController">
+        <property name="statementServiceFacade" ref="statementServiceFacade"/>
+    </bean>
+    <bean id="incomeStatementController" class="net.plang.DYAccount.account.statement.controller.IncomeStatementController">
+        <property name="statementServiceFacade" ref="statementServiceFacade"/>
+    </bean>
+    <bean id="financialPositionController" class="net.plang.DYAccount.account.statement.controller.FinancialPositionController">
+        <property name="statementServiceFacade" ref="statementServiceFacade"/>
+    </bean>
+</beans>

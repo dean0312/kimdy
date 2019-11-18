@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+        <sqlMap namespace="Excel">
+    <typeAlias alias="slipExcelBean" type="net.plang.DYAccount.base.to.SlipExcelBean"/>
+
+    <resultMap id="slipExcelResult" class="slipExcelBean">
+        <result property="slipNo" column="SLIP_NO"/>
+        <result property="accountPeriodNo" column="ACCOUNT_PERIOD_NO"/>
+        <result property="deptName" column="DEPT_NAME"/>
+        <result property="slipType" column="SLIP_TYPE"/>
+        <result property="expenseReport" column="EXPENSE_REPORT"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="reportingDate" column="REPORTING_DATE"/>
+        <result property="slipStatus" column="SLIP_STATUS"/>
+    </resultMap>
+        <select id="selectSlipExcelList" parameterClass="java.util.HashMap" resultClass="slipExcelBean">
+    <![CDATA[SELECT DISTINCT  S.SLIP_NO as slipNo,
+                              D.DEPT_NAME AS deptName,
+                      		  S.EXPENSE_REPORT as expenseReport,
+                      		  S.SLIP_TYPE as slipType,
+                     		  S.SLIP_STATUS as slipStatus,
+                           	  S.REPORTING_DATE as reportingDate,
+                              S.ACCOUNT_PERIOD_NO as accountPeriodNo,
+                   		      E.EMP_NAME as empName
+ 	    FROM SLIP S,
+             JOURNAL J,
+             Employee E,
+             DEPARTMENT D  
+        WHERE S.SLIP_NO = J.SLIP_NO
+    		AND E.EMP_CODE=S.REPORTING_EMP_CODE
+    		AND D.DEPT_CODE=S.DEPT_CODE
+       	    AND S.REPORTING_DATE BETWEEN #fromDate# AND #toDate#
+      			  ORDER BY S.REPORTING_DATE
+       
+        ]]>
+    </select>
+    </sqlMap>
+        

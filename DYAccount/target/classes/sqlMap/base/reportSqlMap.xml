@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="iReport">
+    <typeAlias alias="slipIreportBean" type="net.plang.DYAccount.base.to.SlipIreportBean"/>
+   
+    <resultMap id="iReportResult" class="slipIreportBean">
+        <result property="slip_no" column="SLIP_NO"/>
+        <result property="JOURNAL_NO" column="JOURNAL_NO"/>
+        <result property="reporting_date" column="REPORTING_DATE"/>
+        <result property="REPORTING_EMP_CODE" column="REPORTING_EMP_CODE"/>
+        <result property="dept_name" column="DEPT_NAME"/>
+        <result property="DEPT_CODE" column="DEPT_CODE"/>
+        <result property="emp_name" column="EMP_NAME"/>
+        <result property="account_name" column="ACCOUNT_NAME"/>
+        <result property="expense_report" column="EXPENSE_REPORT"/>
+        <result property="left_debtor_price" column="LEFT_DEBTOR_PRICE"/>
+        <result property="right_credits_price" column="RIGHT_CREDITS_PRICE"/>
+        <result property="slip_status" column="SLIP_STATUS"/>
+        
+    </resultMap>
+	
+	<select id="selectSlipIreportData" parameterClass="String" resultClass="slipIreportBean">
+	<![CDATA[
+	SELECT s.slip_no,
+				s.expense_report,
+				a.account_name,
+				s.dept_code,
+				s.reporting_date,
+				s.slip_status,
+				s.reporting_emp_code,
+				j.journal_no,
+				d.DEPT_name,
+				j.left_debtor_price,
+				j.right_credits_price,
+				e.emp_name
+				FROM   SLIP S,
+				JOURNAL J,
+				EMPLOYEE E,
+				DEPARTMENT d,
+				ACCOUNT A
+				WHERE  S.SLIP_NO  =J.SLIP_NO
+				AND    e.DEPT_CODE=d.DEPT_CODE
+				AND    e.EMP_CODE =s.REPORTING_EMP_CODE
+				AND    s.slip_no  = #SlipNo#
+				AND    A.ACCOUNT_INNER_CODE=J.ACCOUNT_INNER_CODE
+	]]>
+	
+	</select>
+	
+</sqlMap>

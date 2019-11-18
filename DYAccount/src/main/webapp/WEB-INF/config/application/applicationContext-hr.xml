@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <!--DAO-->
+    <bean id="employeeDAO" class="net.plang.DYAccount.hr.dao.EmployeeDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+
+    <!--ApplicationService-->
+    <bean id="hrApplicationService"
+          class="net.plang.DYAccount.hr.applicationservice.HrApplicationServiceImpl">
+        <property name="employeeDAO" ref="employeeDAO"/>
+        <property name="detailCodeDAO" ref="detailCodeDAO"/>
+    </bean>
+
+    <!--ServiceFacade-->
+    <bean id="hrServiceFacade" class="net.plang.DYAccount.hr.serviceFacade.HRServiceFacadeImpl">
+
+        <property name="hrApplicationService" ref="hrApplicationService"/>
+    </bean>
+</beans>

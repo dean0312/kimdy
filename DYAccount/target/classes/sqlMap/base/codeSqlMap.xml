@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="code">
+    <typeAlias alias="codeBean" type="net.plang.DYAccount.base.to.CodeBean"/>
+  
+    <resultMap id="codeResult" class="codeBean">
+        <result property="divisionCodeNo" column="DIVISION_CODE_NO"/>
+        <result property="codeType" column="CODE_TYPE"/>
+        <result property="divisionCodeName" column="DIVISION_CODE_NAME"/>
+    </resultMap>
+
+	<select id="selectCodeList" resultClass="CodeBean">
+	<![CDATA[
+		SELECT * FROM CODE WHERE DIVISION_CODE_NO <> 'HR-02' ORDER BY DIVISION_CODE_NO
+	]]>
+	</select>
+	
+	<insert id="insertCode" parameterClass="codeBean">
+	<![CDATA[
+		INSERT INTO CODE(DIVISION_CODE_NO, CODE_TYPE, DIVISION_CODE_NAME) VALUES(#divisionCodeNo#, #codeType#, #divisionCodeName#)
+	]]>
+	</insert>
+	
+	<update id="updateCode" parameterClass="codeBean">
+	<![CDATA[
+		UPDATE CODE SET DIVISION_CODE_NO = #divisionCodeNo# , CODE_TYPE = #codeType#, DIVISION_CODE_NAME = #divisionCodeName#
+                WHERE DIVISION_CODE_NO = #divisionCodeNo#
+	]]>
+	</update>
+	
+	<delete id="deleteCode" parameterClass="String">
+	<![CDATA[
+		DELETE CODE WHERE DIVISION_CODE_NO = #divisionCodeNo#
+	]]>
+	
+	</delete>
+
+</sqlMap>

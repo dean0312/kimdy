@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="totalTrialBalance">
+    <typeAlias alias="totalTrialBalanceBean" type="net.plang.DYAccount.account.statement.to.TotalTrialBalanceBean"/>
+       
+     <resultMap id="totalTrialBalanceResult" class="totalTrialBalanceBean">
+ 
+        <result property="lev" column="LEV"/>
+        <result property="accountName" column="ACCOUNT_NAME"/>
+        <result property="accountInnerCode" column="CODE"/>       
+        <result property="debitsSumBalance" column="DEBITS_SUM_BALANCE"/>         
+        <result property="debitsSum" column="DEBITS_SUM"/>        
+        <result property="creditsSum" column="CREDITS_SUM"/>
+        <result property="creditsSumBalance" column="CREDITS_SUM_BALANCE"/>
+    
+        
+    </resultMap>
+
+	<parameterMap id="totalTrialBalanceParams" class="java.util.Map">
+        <parameter property="toDate" jdbcType="VARCHAR" javaType="String" mode="IN"/>
+        <parameter property="ERROR_CODE" jdbcType="DECIMAL" javaType="int" mode="OUT"/>
+        <parameter property="ERROR_MSG" jdbcType="VARCHAR" javaType="String" mode="OUT"/>
+        <parameter property="RESULT" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT"/>
+    </parameterMap>
+
+    <procedure id="callTotalTrialBalance" parameterMap="totalTrialBalanceParams" resultMap="totalTrialBalanceResult">
+    <![CDATA[
+        {call P_TOTAL_TRIAL_BALANCE(?, ?, ?, ?)}
+    ]]>
+    </procedure>
+	
+
+</sqlMap>

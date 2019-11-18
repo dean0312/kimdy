@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- JSON 뷰 -->
+	<bean id="beanNameViewResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0" />
+	</bean>
+	<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType"
+			value="application/json; charset=UTF-8" />
+	</bean>
+	<!--EXCEL 뷰 -->
+	<bean name="excelView" class="net.plang.DYAccount.common.view.ExcelView" />
+	<!--xml viewresolver -->
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location">
+			<value>/WEB-INF/xml-views.xml</value>
+		</property>
+		<property name="order" value="0" />
+	</bean>
+	<!-- org.springframework.web.servlet.view.json.MappingJackson2JsonView -->
+	<!-- URL과 JSP 매핑 -->
+	<bean id="urlFilenameViewController"
+		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+
+
+	<bean id="slipDetailIreportPdfView"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView">
+		<property name="url"
+			value="/resources/reportform/report11.jrxml" />
+		<property name="reportDataKey" value="source" />
+	</bean>
+
+	<!-- .do 파일의 method 매핑 -->
+	<bean id="parameterMethodNameResolver"
+		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="method" />
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>
+
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="journalDetail">
+    <typeAlias alias="journalDetailBean" type="net.plang.DYAccount.account.slip.to.JournalDetailBean"/>
+       
+     <resultMap id="journalDetailResult" class="journalDetailBean">
+     
+        <result property="journalDetailNo" column="JOURNAL_DETAIL_NO"/>
+        <result property="accountControlName" column="ACCOUNT_CONTROL_NAME"/>
+        <result property="accountControlType" column="ACCOUNT_CONTROL_TYPE"/>
+        <result property="journalDescription" column="JOURNAL_DESCRIPTION"/>
+        <result property="accountControlDescription" column="ACCOUNT_CONTROL_DESCRIPTION"/>
+        
+    </resultMap>
+
+	<select id="selectJournalDetailList" parameterClass="String" resultClass="journalDetailBean">
+	<![CDATA[
+	    SELECT J.JOURNAL_DETAIL_NO as journalDetailNo,
+                J.DESCRIPTION as journalDescription,
+                A.ACCOUNT_CONTROL_TYPE as accountControlType,
+                A.ACCOUNT_CONTROL_NAME as accountControlName,
+                A.DESCRIPTION as accountControlDescription 
+        FROM JOURNAL_DETAIL J, ACCOUNT_CONTROL_DETAIL A 
+        WHERE JOURNAL_NO = #journalNo#
+        AND J.ACCOUNT_CONTROL_CODE = A.ACCOUNT_CONTROL_CODE
+	]]>
+	
+	</select>
+	
+	<delete id="deleteJournalDetailByJournalNo" parameterClass="String">
+	<![CDATA[
+		DELETE FROM JOURNAL_DETAIL WHERE JOURNAL_NO = #journalNo#
+	]]>
+	</delete>
+	
+	<update id="updateJournalDetail" parameterClass="journalDetailBean">
+	<![CDATA[
+		UPDATE JOURNAL_DETAIL SET DESCRIPTION = #journalDescription# WHERE JOURNAL_DETAIL_NO = #journalDetailNo#
+	]]>
+	</update>
+	
+	<insert id="insertJournalDetailList" parameterClass="String">
+	<![CDATA[
+		INSERT INTO JOURNAL_DETAIL
+       (SELECT J.JOURNAL_NO,
+               JOURNAL_DETAIL_NO_SEQUENCE.NEXTVAL,
+               ACC.ACCOUNT_CONTROL_CODE,
+               NULL
+       FROM    JOURNAL J,
+               ACCOUNT_CONTROL_CODE ACC,
+               ACCOUNT_CONTROL_DETAIL ACD
+       WHERE   J.JOURNAL_NO             = #journalNo#
+       AND     J.ACCOUNT_INNER_CODE     = ACC.ACCOUNT_CODE
+       AND     ACC.ACCOUNT_CONTROL_CODE = ACD.ACCOUNT_CONTROL_CODE)
+	]]>
+	</insert>
+
+</sqlMap>

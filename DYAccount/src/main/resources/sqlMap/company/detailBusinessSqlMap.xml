@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="detailBusiness">
+    <typeAlias alias="DetailBusinessBean" type="net.plang.DYAccount.company.to.DetailBusinessBean"/>
+    <resultMap id="businessResult" class="DetailBusinessBean">
+        <result property="detailBusinessName" column="detailbusinessname"/>
+        <result property="childClassificationCode" column="childclassificationcode"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <select id="selectDetailBusinessList" parameterClass="String" resultClass="DetailBusinessBean">
+    <![CDATA[
+        SELECT DETAIL_BUSINESS_NAME as detailbusinessname,
+        	   CLASSIFICATION_CODE as childclassificationcode,
+        	   REMARKS as remarks
+		FROM DETAIL_BUSINESS
+		WHERE CLASSIFICATION_CODE = #businessCode#
+        ]]>
+    </select>
+</sqlMap>
+    

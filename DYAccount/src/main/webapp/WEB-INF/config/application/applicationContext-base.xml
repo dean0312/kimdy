@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <!--DAO-->
+    <bean id="codeDAO" class="net.plang.DYAccount.base.dao.CodeDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    <bean id="detailCodeDAO" class="net.plang.DYAccount.base.dao.DetailCodeDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    <bean id="reportDAO" class="net.plang.DYAccount.base.dao.ReportDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    <bean id="excelDAO" class="net.plang.DYAccount.base.dao.ExcelDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+
+    <!--ApplicationService-->
+    <bean id="baseApplicationService"
+          class="net.plang.DYAccount.base.applicationService.BaseApplicationServiceImpl">
+        <property name="employeeDAO" ref="employeeDAO"/>
+    </bean>
+    <bean id="codeListApplicationService" class="net.plang.DYAccount.base.applicationService.CodeListApplicationServiceImpl">
+        <property name="codeDAO" ref="codeDAO"/>
+        <property name="detailCodeDAO" ref="detailCodeDAO"/>
+    </bean>
+    <bean id="reportApplicationService"
+          class="net.plang.DYAccount.base.applicationService.ReportApplicationServiceImpl">
+        <property name="reportDAO" ref="reportDAO"/>
+        </bean>
+    <bean id="excelApplicationService"
+          class="net.plang.DYAccount.base.applicationService.ExcelApplicationServiceImpl">
+        <property name="excelDAO" ref="excelDAO"/>
+    </bean> 
+
+
+    <!--ServiceFacade-->
+    <bean id="baseServiceFacade" class="net.plang.DYAccount.base.serviceFacade.BaseServiceFacadeImpl">
+        <property name="baseApplicationService" ref="baseApplicationService"/>
+        <property name="reportApplicationService" ref="reportApplicationService"/> 
+        <property name="excelApplicationService" ref="excelApplicationService"/> 
+    </bean>
+    <bean id="codeListServiceFacade" class="net.plang.DYAccount.base.serviceFacade.CodeListServiceFacadeImpl">
+        <property name="codeListApplicationService" ref="codeListApplicationService"/>
+    </bean>
+</beans>

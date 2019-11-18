@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean id="incomeStatementDAO" class="net.plang.DYAccount.account.statement.dao.IncomeStatementDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    <bean id="financialPositionDAO" class="net.plang.DYAccount.account.statement.dao.FinancialPositionDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    <bean id="totalTrialBalanceDAO" class="net.plang.DYAccount.account.statement.dao.TotalTrialBalanceDAOImpl" parent="iBatisDAOSupport">
+    </bean>
+    
+    <bean id="statementApplicationService"
+          class="net.plang.DYAccount.account.statement.applicationService.StatementApplicationServiceImpl">
+        <property name="financialPositionDAO" ref="financialPositionDAO"/>
+        <property name="totalTrialBalanceDAO" ref="totalTrialBalanceDAO"/>
+        <property name="incomeStatementDAO" ref="incomeStatementDAO"/>
+    </bean>
+    
+    <bean id="statementServiceFacade"
+          class="net.plang.DYAccount.account.statement.serviceFacade.StatementServiceFacadeImpl">
+        <property name="statementApplicationService" ref="statementApplicationService"/>
+    </bean>
+</beans>

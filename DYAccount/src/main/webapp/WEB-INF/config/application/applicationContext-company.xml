@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <!--DAO-->
+    <bean id="businessDAO" class="net.plang.DYAccount.company.dao.BusinessDAOImpl" parent="iBatisDAOSupport" />
+    
+    <bean id="workPlaceDAO" class="net.plang.DYAccount.company.dao.WorkplaceDAOImpl" parent="iBatisDAOSupport" />
+    
+    <bean id="detailBusinessDAO" class="net.plang.DYAccount.company.dao.DetailBusinessDAOImpl" parent="iBatisDAOSupport" />
+
+    <!--ApplicationService-->
+    <bean id="businessApplicationService"
+          class="net.plang.DYAccount.company.applicationService.BusinessApplicationServiceImpl">
+        <property name="businessDAO" ref="businessDAO"/>
+        <property name="detailBusinessDAO" ref="detailBusinessDAO"/>
+    </bean>
+    <bean id="workplaceApplicationService" class="net.plang.DYAccount.company.applicationService.WorkplaceApplicationServiceImpl">
+        <property name="workplaceDAO" ref="workPlaceDAO"/>
+    </bean>
+
+
+    <!--ServiceFacade-->
+    <bean id="businessServiceFacade" class="net.plang.DYAccount.company.serviceFacade.BusinessServiceFacadeImpl">
+        <property name="businessApplicationService" ref="businessApplicationService"/>
+    </bean>
+    <bean id="workplaceServiceFacade" class="net.plang.DYAccount.company.serviceFacade.WorkplaceServiceFacadeImpl">
+        <property name="workplaceApplicationService" ref="workplaceApplicationService"/>
+    </bean>
+</beans>

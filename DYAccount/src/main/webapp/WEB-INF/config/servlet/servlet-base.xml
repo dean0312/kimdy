@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <!-- .html --> 
+                <prop key="/base/codeManageForm.html">urlFilenameViewController</prop>
+                <prop key="/base/addressForm.html">urlFilenameViewController</prop>
+                <prop key="/base/slipexcelForm.html">urlFilenameViewController</prop>
+                <prop key="/base/report.html">reportController</prop>
+                <prop key="/base/excel.html">excelController</prop>
+<!--                 <prop key="/base/pdfEmail.html">emailController</prop>  -->
+
+                <!-- .do -->
+                <prop key="/base/openApi.do">openApiController</prop>
+                <prop key="/base/codeList.do">codeListController</prop>
+                <prop key="/base/imgFileupload.do">imgFileController</prop>
+            </props>
+        </property>
+        <property name="alwaysUseFullPath" value="true"/>
+    </bean>
+
+    <bean id="codeListController" class="net.plang.DYAccount.base.controller.CodeListController">
+        <property name="codeListServiceFacade" ref="codeListServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+     <bean id="reportController" class="net.plang.DYAccount.base.controller.ReportController">
+     	<property name="baseServiceFacade" ref="baseServiceFacade"/> 
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+     <bean id="excelController" class="net.plang.DYAccount.base.controller.ExcelController">
+        <property name="baseServiceFacade" ref="baseServiceFacade"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+    <bean id="imgFileController" class="net.plang.DYAccount.common.controller.ImgFileController" />
+	<bean id="openApiController" class="net.plang.DYAccount.base.controller.OpenApiController" />
+<!--  	<bean id="emailController" class="net.plang.DYAccount.base.controller.EmailController" />  -->
+</beans>

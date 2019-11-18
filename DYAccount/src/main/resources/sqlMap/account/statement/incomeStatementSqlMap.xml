@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="incomeStatement">
+    <typeAlias alias="incomeStatementBean" type="net.plang.DYAccount.account.statement.to.IncomeStatementBean"/>
+       
+     <resultMap id="incomeStatementResult" class="incomeStatementBean">
+     
+        <result property="accountInnerCode" column="ACCOUNT_INNER_CODE"/>
+        <result property="accountName" column="ACCOUNT_NAME"/>
+        <result property="parentAccountCode" column="PARENT_ACCOUNT_CODE"/>       
+        <result property="income" column="INCOME"/>         
+        <result property="incomeSummary" column="INCOME_SUMMARY"/>        
+        <result property="earlyIncome" column="EARLY_INCOME"/>
+        <result property="earlyIncomeSummary" column="EARLY_INCOME_SUMMARY"/>
+    
+        
+    </resultMap>
+
+	<parameterMap id="incomeStatementParams" class="java.util.Map">
+        <parameter property="toDate" jdbcType="VARCHAR" javaType="String" mode="IN"/>
+        <parameter property="ERROR_CODE" jdbcType="DECIMAL" javaType="int" mode="OUT"/>
+        <parameter property="ERROR_MSG" jdbcType="VARCHAR" javaType="String" mode="OUT"/>
+        <parameter property="RESULT" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT"/>
+    </parameterMap>
+
+    <procedure id="callIncomeStatement" parameterMap="incomeStatementParams" resultMap="incomeStatementResult">
+    <![CDATA[
+        {call P_INCOME_STATEMENT(?, ?, ?, ?)}
+    ]]>
+    </procedure>
+	
+
+</sqlMap>
