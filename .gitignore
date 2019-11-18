@@ -1,0 +1,98 @@
+# https://www.gitignore.io/api/java,eclipse에 의해 생성됨
+# https://www.gitignore.io/?templates=java,eclipse에서 편집
+
+### 이클립스 ###
+.metadata
+큰 상자/
+tmp /
+* .tmp
+* .bak
+* .swp
+* ~ .nib
+local.properties
+설정 /
+.loadpath
+추천자
+
+# 외부 툴 빌더
+.externalToolBuilders /
+
+# 로컬로 저장된 "Eclipse launch configuration"
+*.쏘다
+
+# PyDev 특정 (Python IDE for Eclipse)
+* .pydevproject
+
+# CDT 특정 (C / C ++ 개발 툴링)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java 주석 프로세서 (APT)
+.factorypath
+
+# PDT 관련 (PHP 개발 도구)
+.buildpath
+
+# sbteclipse 플러그인
+.목표
+
+# Tern 플러그인
+.tern-project
+
+# TeXlipse 플러그인
+.texlipse
+
+# STS (스프링 툴 스위트)
+.springBeans
+
+# 코드 추천자
+.recommenders /
+
+# 주석 처리
+.apt_generated /
+
+# 스칼라 IDE 전용 (Eclipse 용 Scala & Java 개발)
+.cache-main
+.scala_dependencies
+. 워크 시트
+
+### 이클립스 패치 ###
+# 이클립스 코어
+.계획
+
+# JDT 특정 (Eclipse Java 개발 도구)
+.classpath
+
+# 주석 처리
+.apt_generated
+
+.sts4-cache /
+
+### Java ###
+# 컴파일 된 클래스 파일
+*.수업
+
+# 로그 파일
+*.로그
+
+# BlueJ 파일
+* .ctxt
+
+# Java 용 모바일 도구 (J2ME)
+.mtj.tmp /
+
+# 패키지 파일 #
+*.항아리
+*.전쟁
+* .nar
+*.귀
+*.지퍼
+* .tar.gz
+* .rar
+
+# 가상 머신 충돌 로그, http://www.java.com/en/download/help/error_hotspot.xml 참조
+hs_err_pid *
+
+# https://www.gitignore.io/api/java,eclipse의 끝
