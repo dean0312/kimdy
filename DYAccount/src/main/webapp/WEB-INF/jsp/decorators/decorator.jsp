@@ -134,7 +134,7 @@
             <div class="sidebar-header">
                 <div class="logo">
                     <%--<img src="/assets/images/icon/logo.png" alt="logo">--%>
-                    <h3><a href="${pageContext.request.contextPath}/hello.html">DYAccount</a></h3>
+                    <h3><a href="${pageContext.request.contextPath}/hello.html">DY  Account</a></h3>
                     
                 </div>
             </div>
@@ -271,7 +271,7 @@
         <%-- footer area start--%>
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2019. HoWooAccount All right reserved.</a>.
+                <p>© Copyright 2019. DYAccount All right reserved.</a>.
                 </p>
             </div>
         </footer>
