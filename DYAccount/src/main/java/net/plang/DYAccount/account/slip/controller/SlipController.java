@@ -92,7 +92,6 @@ public class SlipController extends MultiActionController {
 
     public ModelAndView findRangedSlipList(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView("jsonView");
-
         String fromDate = request.getParameter("from");
         String toDate = request.getParameter("to");
         ArrayList<SlipBean> slipList = slipServiceFacade.findRangedSlipList(fromDate, toDate);

@@ -34,6 +34,7 @@ public class JournalDAOImpl extends IBatisDAOSupport implements JournalDAO {
     @Override
     public String insertJournal(String slipNo, JournalBean journalBean) {
     	String journalNo = (String ) this.getSqlMapClientTemplate().queryForObject("journal.selectJournalName",slipNo);
+    	System.out.println(journalNo);
     	 journalBean.setSlipNo(slipNo);
          journalBean.setJournalNo(journalNo);
          this.getSqlMapClientTemplate().insert("journal.insertJournal" , journalBean);

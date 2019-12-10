@@ -12,7 +12,9 @@ public class LoggingAdvice implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         String className = methodInvocation.getClass().getName();
+        System.out.println(className);
         String methodName = methodInvocation.getMethod().getName();
+        System.out.println(methodName);
         if(logger.isDebugEnabled())
             logger.debug(className + " : " + methodName + " Start");
 
