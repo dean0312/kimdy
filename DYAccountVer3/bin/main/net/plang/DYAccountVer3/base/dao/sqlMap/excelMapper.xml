@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.DYAccountVer3.base.dao.ExcelDAO">
+
+   <resultMap id="slipExcelResult" type="slipExcelBean">
+       <result property="slipNo" column="SLIP_NO"/>
+        <result property="accountPeriodNo" column="ACCOUNT_PERIOD_NO"/>
+        <result property="deptName" column="DEPT_NAME"/>
+        <result property="slipType" column="SLIP_TYPE"/>
+        <result property="expenseReport" column="EXPENSE_REPORT"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="reportingDate" column="REPORTING_DATE"/>
+        <result property="slipStatus" column="SLIP_STATUS"/>
+   </resultMap>
+     <select id="selectSlipExcelList" parameterType="java.util.HashMap" resultMap="slipExcelResult">
+    <![CDATA[SELECT DISTINCT  S.SLIP_NO ,
+                              D.DEPT_NAME,
+                      		  S.EXPENSE_REPORT ,
+                      		  S.SLIP_TYPE ,
+                     		  S.SLIP_STATUS ,
+                           	  S.REPORTING_DATE ,
+                              S.ACCOUNT_PERIOD_NO ,
+                   		      E.EMP_NAME
+ 	    FROM SLIP S,
+             JOURNAL J,
+             Employee E,
+             DEPARTMENT D  
+        WHERE S.SLIP_NO = J.SLIP_NO
+    		AND E.EMP_CODE=S.REPORTING_EMP_CODE
+    		AND D.DEPT_CODE=S.DEPT_CODE
+       	    AND S.REPORTING_DATE BETWEEN #{fromDate} AND #{toDate}
+      			  ORDER BY S.REPORTING_DATE
+       
+        ]]>
+    </select>
+   </mapper>

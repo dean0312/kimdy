@@ -7,7 +7,7 @@ import net.plang.DYAccount.account.slip.to.JournalBean;
 import net.plang.DYAccount.account.slip.to.SlipBean;
 
 public class SlipServiceFacadeImpl implements SlipServiceFacade {
-    private SlipApplicationService slipApplicationService;
+    public SlipApplicationService slipApplicationService;
 
     @Override
     public String addSlip(SlipBean slipBean, ArrayList<JournalBean> journalBeans) {

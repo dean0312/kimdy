@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.DYAccountVer3.account.statement.dao.IncomeStatementDAO">
+
+   <resultMap id="incomeStatementResult" type="incomeStatementBean">
+     	<result property="accountInnerCode" column="ACCOUNT_INNER_CODE"/>
+        <result property="accountName" column="ACCOUNT_NAME"/>
+        <result property="parentAccountCode" column="PARENT_ACCOUNT_CODE"/>       
+        <result property="income" column="INCOME"/>         
+        <result property="incomeSummary" column="INCOME_SUMMARY"/>        
+        <result property="earlyIncome" column="EARLY_INCOME"/>
+        <result property="earlyIncomeSummary" column="EARLY_INCOME_SUMMARY"/>      
+    </resultMap>
+    <parameterMap id="incomeStatementParams" type="java.util.Map">
+       <parameter property="toDate" jdbcType="VARCHAR" javaType="String" mode="IN"/>
+        <parameter property="ERROR_CODE" jdbcType="DECIMAL" javaType="int" mode="OUT"/>
+        <parameter property="ERROR_MSG" jdbcType="VARCHAR" javaType="String" mode="OUT"/>
+    </parameterMap>
+    <select id="callIncomeStatement" statementType="CALLABLE" parameterMap="incomeStatementParams" resultMap="incomeStatementResult">
+		CALL P_INCOME_STATEMENT(?, ?, ?, ?)
+	</select>
+</mapper>
